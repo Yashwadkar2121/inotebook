@@ -39,12 +39,55 @@ router.post(
       const data = { user: { id: user.id } };
       const authToken = jwt.sign(data, process.env.JWT_SECRET);
 
-      res.json({ user, authToken });
+      res.json({ authToken });
     } catch (error) {
       console.error(error.message);
-      res.status(500).send("Some error occured");
+      res.status(500).send("Internal server ERROR");
     }
   }
 );
 
+// Authentication a User using: POST "/api/auth/login". No Login Requried
+router.post(
+  "/login",
+  [
+    body("email", "Enter a valid Email").isEmail(),
+    body("password", "password cannot be blank").exists(),
+  ],
+  async (req, res) => {
+    // Check whether the email is already exist
+    // let user = await User.findOne({ email: req.body.email });
+    // if (!user) {
+    //   return res
+    //     .status(400)
+    //     .json({ error: "Plaese try to login eith correct credentials 1" });
+    // }
+
+    const { email, password } = req.body;
+    try {
+      // Check whether the email is already exist
+      let user = await User.findOne({ email });
+      if (!user) {
+        return res
+          .status(400)
+          .json({ error: "Plaese try to login eith correct credentials 1" });
+      }
+      // Check whether the password is correct
+      const passwordCompare = await bcrypt.compare(password, user.password);
+      if (!passwordCompare) {
+        return res
+          .status(400)
+          .json({ error: "Plaese try to login eith correct credentials 2" });
+      }
+
+      const data = { user: { id: user.id } };
+      const authToken = jwt.sign(data, process.env.JWT_SECRET);
+
+      res.json({ authToken });
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send(" Internal server ERROR");
+    }
+  }
+);
 module.exports = router;
