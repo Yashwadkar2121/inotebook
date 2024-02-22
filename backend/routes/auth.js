@@ -4,8 +4,9 @@ const User = require("../models/User");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const fetchUser = require("../middleware/fetchUser");
 
-// Create a User using: POST "/api/auth/createuser". No Login Requried
+// ROUTE 1 :- Create a User using: POST "/api/auth/createuser". No Login Requried
 router.post(
   "/createuser",
   [
@@ -47,7 +48,7 @@ router.post(
   }
 );
 
-// Authentication a User using: POST "/api/auth/login". No Login Requried
+// ROUTE 2 :- Authentication a User using: POST "/api/auth/login". No Login Requried
 router.post(
   "/login",
   [
@@ -55,14 +56,6 @@ router.post(
     body("password", "password cannot be blank").exists(),
   ],
   async (req, res) => {
-    // Check whether the email is already exist
-    // let user = await User.findOne({ email: req.body.email });
-    // if (!user) {
-    //   return res
-    //     .status(400)
-    //     .json({ error: "Plaese try to login eith correct credentials 1" });
-    // }
-
     const { email, password } = req.body;
     try {
       // Check whether the email is already exist
@@ -90,4 +83,17 @@ router.post(
     }
   }
 );
+
+// ROUTE 3 :- GET Loggedin a User Details: POST "/api/auth/getuser".  Login Requried
+router.post("/getuser", fetchUser, async (req, res) => {
+  try {
+    userId = req.user.id;
+    const user = await User.findById(userId).select("-password");
+    res.send(user);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send(" Internal server ERROR 3");
+  }
+});
+
 module.exports = router;
