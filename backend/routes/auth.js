@@ -63,14 +63,14 @@ router.post(
       if (!user) {
         return res
           .status(400)
-          .json({ error: "Plaese try to login eith correct credentials 1" });
+          .json({ error: "Plaese try to login eith correct credentials " });
       }
       // Check whether the password is correct
       const passwordCompare = await bcrypt.compare(password, user.password);
       if (!passwordCompare) {
         return res
           .status(400)
-          .json({ error: "Plaese try to login eith correct credentials 2" });
+          .json({ error: "Plaese try to login eith correct credentials " });
       }
 
       const data = { user: { id: user.id } };
@@ -92,7 +92,7 @@ router.post("/getuser", fetchUser, async (req, res) => {
     res.send(user);
   } catch (error) {
     console.error(error.message);
-    res.status(500).send(" Internal server ERROR 3");
+    res.status(500).send(" Internal server ERROR ");
   }
 });
 
