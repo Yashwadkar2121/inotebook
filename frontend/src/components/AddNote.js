@@ -1,24 +1,25 @@
-import React, { useState, useContext } from "react";
+import React, { useContext, useState } from "react";
 import noteContext from "../context/notes/noteContext";
 
 const AddNote = () => {
   const context = useContext(noteContext);
   const { addNote } = context;
-  const [note, setNote] = useState({
-    title: "",
-    descrition: "",
-    tag: "default",
-  });
-  const handleclick = (e) => {
+
+  const [note, setNote] = useState({ title: "", description: "", tag: "" });
+
+  const handleClick = (e) => {
     e.preventDefault();
-    addNote(note.title, note.descrition, note.tag);
+    addNote(note.title, note.description, note.tag);
+    setNote({ title: "", description: "", tag: "" });
   };
-  const onchange = (e) => {
+
+  const onChange = (e) => {
     setNote({ ...note, [e.target.name]: e.target.value });
   };
   return (
-    <div>
-      <form>
+    <div className="container my-3">
+      <h2>Add a Note</h2>
+      <form className="my-3">
         <div className="mb-3">
           <label htmlFor="title" className="form-label">
             Title
@@ -29,19 +30,25 @@ const AddNote = () => {
             id="title"
             name="title"
             aria-describedby="emailHelp"
-            onChange={onchange}
+            value={note.title}
+            onChange={onChange}
+            minLength={5}
+            required
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="descrition" className="form-label">
+          <label htmlFor="description" className="form-label">
             Description
           </label>
           <input
             type="text"
             className="form-control"
-            id="descrition"
-            name="descrition"
-            onChange={onchange}
+            id="description"
+            name="description"
+            value={note.description}
+            onChange={onChange}
+            minLength={5}
+            required
           />
         </div>
         <div className="mb-3">
@@ -53,11 +60,20 @@ const AddNote = () => {
             className="form-control"
             id="tag"
             name="tag"
-            onChange={onchange}
+            value={note.tag}
+            onChange={onChange}
+            minLength={5}
+            required
           />
         </div>
-        <button type="submit" className="btn btn-primary" onClick={handleclick}>
-          Submit
+
+        <button
+          disabled={note.title.length < 5 || note.description.length < 5}
+          type="submit"
+          className="btn btn-primary"
+          onClick={handleClick}
+        >
+          Add Note
         </button>
       </form>
     </div>

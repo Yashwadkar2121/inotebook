@@ -1,13 +1,12 @@
 import React from "react";
 
-const Alert = () => {
+const Alert = (props) => {
   return (
     <div>
       <div className="alert alert-primary" role="alert">
-        A simple primary alert—check it out!
+        {props.message}
       </div>
     </div>
   );
 };
-
 export default Alert;
