@@ -23,7 +23,6 @@ const NoteState = (props) => {
 
   // Add a Note
   const addNote = async (title, description, tag) => {
-    // TODO: API Call
     // API Call
     const response = await fetch(`${host}/api/notes/addnote`, {
       method: "POST",
@@ -55,6 +54,7 @@ const NoteState = (props) => {
       return note._id !== id;
     });
     setNotes(newNotes);
+    console.log(json);
   };
 
   // Edit a Note
@@ -70,6 +70,7 @@ const NoteState = (props) => {
       body: JSON.stringify({ title, description, tag }),
     });
     const json = await response.json();
+    console.log(json);
 
     let newNotes = JSON.parse(JSON.stringify(notes));
     // Logic to edit in client
