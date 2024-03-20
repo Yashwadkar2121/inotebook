@@ -33,7 +33,7 @@ const AddNote = (props) => {
             aria-describedby="emailHelp"
             value={note.title}
             onChange={onChange}
-            minLength={5}
+            minLength={3}
             required
           />
         </div>

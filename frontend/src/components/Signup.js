@@ -27,7 +27,7 @@ const Signup = (props) => {
     const json = await response.json();
     console.log(json);
     // Save the auth token and redirect
-    localStorage.setItem("token", json.authtoken);
+    localStorage.setItem("token", json.authToken);
     props.showAlert("Account Create is Succesfully", "success");
     history("/");
   };
@@ -75,6 +75,8 @@ const Signup = (props) => {
             id="password"
             name="password"
             onChange={onChange}
+            minLength={6}
+            required
           />
         </div>
         <div className="mb-3">
@@ -87,6 +89,8 @@ const Signup = (props) => {
             id="cpassword"
             name="cpassword"
             onChange={onChange}
+            minLength={6}
+            required
           />
         </div>
         <button type="submit" className="btn btn-primary">

@@ -10,9 +10,9 @@ const fetchUser = require("../middleware/fetchUser");
 router.post(
   "/createuser",
   [
+    body("name", "Enter a valid Name").isLength({ min: 3 }),
     body("email", "Enter a valid Email").isEmail(),
     body("password", "password atleast 6 characters").isLength({ min: 6 }),
-    body("name", "Enter a valid Name").isLength({ min: 3 }),
   ],
   async (req, res) => {
     let success = false;
@@ -39,8 +39,11 @@ router.post(
         password: secPass,
         email: req.body.email,
       });
+      
       const data = { user: { id: user.id } };
       const authToken = jwt.sign(data, process.env.JWT_SECRET);
+
+      // res.json (user)
       success = true;
       res.json({ success, authToken });
     } catch (error) {
@@ -69,18 +72,16 @@ router.post(
       // Check whether the email is already exist
       let user = await User.findOne({ email });
       if (!user) {
-        return;
         success = false;
-        res
+        return res
           .status(400)
           .json({ error: "Plaese try to login eith correct credentials " });
       }
       // Check whether the password is correct
       const passwordCompare = await bcrypt.compare(password, user.password);
       if (!passwordCompare) {
-        return;
         success = false;
-        res
+        return res
           .status(400)
           .json({ error: "Plaese try to login eith correct credentials " });
       }
