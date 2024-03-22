@@ -6,9 +6,8 @@ const Signup = (props) => {
     name: "",
     email: "",
     password: "",
-    cpassword: "",
   });
-  let history = useNavigate();
+  let navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,7 +28,7 @@ const Signup = (props) => {
     // Save the auth token and redirect
     localStorage.setItem("token", json.authToken);
     props.showAlert("Account Create is Succesfully", "success");
-    history("/");
+    navigate("/");
   };
 
   const onChange = (e) => {
@@ -79,20 +78,7 @@ const Signup = (props) => {
             required
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="cpassword" className="form-label">
-            Confirm Password
-          </label>
-          <input
-            type="password"
-            className="form-control"
-            id="cpassword"
-            name="cpassword"
-            onChange={onChange}
-            minLength={6}
-            required
-          />
-        </div>
+
         <button type="submit" className="btn btn-primary">
           Submit
         </button>
