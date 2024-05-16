@@ -11,7 +11,7 @@ const port = 5000;
 app.use(express.json());
 app.use(
   cors({
-    origin: ["https://inotebook-frontend-mauve.vercel.app/login"],
+    origin: ["https://inotebook-frontend-mauve.vercel.app"],
     methods: ["POST", "GET", "DELETE", "PUT"],
     credentials: true,
   })
