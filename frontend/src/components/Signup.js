@@ -7,7 +7,7 @@ const Signup = (props) => {
     email: "",
     password: "",
   });
-  const host = "https://inotebook-backend-mauve.vercel.app/";
+  const host = "https://inotebook-backend-mauve.vercel.app";
 
   let navigate = useNavigate();
 
