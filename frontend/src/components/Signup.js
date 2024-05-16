@@ -7,12 +7,14 @@ const Signup = (props) => {
     email: "",
     password: "",
   });
+  const host = "http://localhost:5000" || "https://inotebook-rho.vercel.app";
+
   let navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { name, email, password } = credentials;
-    const response = await fetch("http://localhost:5000/api/auth/createuser", {
+    const response = await fetch(`${host}/api/auth/createuser`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
