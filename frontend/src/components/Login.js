@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const Login = (props) => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   let navigate = useNavigate();
-  const host = "https://inotebook-rho.vercel.app";
+  const host = "https://inotebook-backend-mauve.vercel.app/";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
