@@ -11,7 +11,7 @@ const port = process.env.PORT || 5000;
 app.use(express.json());
 app.use(
   cors({
-    origin: ["https://inotebook-rho.vercel.app"],
+    origin: ["https://inotebook-p3z7.vercel.app/login"],
     methods: ["POST", "GET"],
     credentials: true,
   })
