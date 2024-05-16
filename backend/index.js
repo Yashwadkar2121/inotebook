@@ -9,7 +9,13 @@ const port = process.env.PORT || 5000;
 
 // middleware for send json body to DB
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://inotebook.vercel.app"],
+    methods: ["POST", "GET"],
+    credentials: true,
+  })
+);
 
 // Avaiable Routes
 app.use("/api/auth", require("./routes/auth"));
