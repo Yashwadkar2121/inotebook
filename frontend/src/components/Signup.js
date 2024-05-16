@@ -7,7 +7,7 @@ const Signup = (props) => {
     email: "",
     password: "",
   });
-  const host = "http://localhost:5000" || "https://inotebook-rho.vercel.app";
+  const host = "https://inotebook-rho.vercel.app";
 
   let navigate = useNavigate();
 

@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: ["https://inotebook-p3z7.vercel.app/login"],
-    methods: ["POST", "GET"],
+    methods: ["POST", "GET", "DELETE", "PUT"],
     credentials: true,
   })
 );
