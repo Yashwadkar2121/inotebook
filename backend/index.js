@@ -11,7 +11,7 @@ const port = 5000;
 app.use(express.json());
 
 const allowedOrigins = [
-  "https://inotebook-acvm02jka-yashs-projects-00930977.vercel.app/",
+  "https://inotebook-silk.vercel.app",
   "http://localhost:3000",
 ];
 
