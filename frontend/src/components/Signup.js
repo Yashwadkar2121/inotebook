@@ -7,8 +7,8 @@ const Signup = (props) => {
     email: "",
     password: "",
   });
-  const host = "https://inotebook-backend-mauve.vercel.app";
-
+  const host = "https://inotebook-9x17-jvkeri9pe-yashs-projects-00930977.vercel.app/";
+  // const host = "http://localhost:5000";
   let navigate = useNavigate();
 
   const handleSubmit = async (e) => {
