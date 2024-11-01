@@ -51,6 +51,7 @@ const Login = (props) => {
             id="email"
             name="email"
             aria-describedby="emailHelp"
+            autoComplete="off"
           />
           <div id="emailHelp" className="form-text">
             We'll never share your email with anyone else.
@@ -67,6 +68,7 @@ const Login = (props) => {
             onChange={onChange}
             name="password"
             id="password"
+            autoComplete="off"
           />
         </div>
 

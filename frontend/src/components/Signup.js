@@ -51,6 +51,7 @@ const Signup = (props) => {
             name="name"
             onChange={onChange}
             aria-describedby="emailHelp"
+            autoComplete="off"
           />
         </div>
         <div className="mb-3">
@@ -64,6 +65,7 @@ const Signup = (props) => {
             name="email"
             onChange={onChange}
             aria-describedby="emailHelp"
+            autoComplete="off"
           />
         </div>
         <div className="mb-3">
@@ -78,6 +80,7 @@ const Signup = (props) => {
             onChange={onChange}
             minLength={6}
             required
+            autoComplete="off"
           />
         </div>
 
