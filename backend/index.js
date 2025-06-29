@@ -1,13 +1,13 @@
 require("dotenv").config();
 const connectToMongo = require("./db");
 const express = require("express");
-var cors = require("cors");
+const cors = require("cors");
 
-connectToMongo();
+// Create express app
 const app = express();
-const port = 5000;
+connectToMongo();
 
-// middleware for sending JSON body to DB
+// Middleware
 app.use(express.json());
 
 const allowedOrigins = [
@@ -18,7 +18,6 @@ const allowedOrigins = [
 app.use(
   cors({
     origin: function (origin, callback) {
-      // allow requests with no origin (like mobile apps or curl requests)
       if (!origin) return callback(null, true);
       if (allowedOrigins.indexOf(origin) === -1) {
         const msg =
@@ -32,12 +31,12 @@ app.use(
   })
 );
 
-// Available Routes
+// Routes
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/notes", require("./routes/notes"));
 app.get("/", (req, res) => {
   res.send("Hello World from server");
 });
-app.listen(port, () => {
-  console.log(`iNotebook app listening on port ${port}`);
-});
+
+// For Vercel: export handler
+module.exports = app;
