@@ -12,6 +12,7 @@ const NoteState = (props) => {
     // API Call
     const response = await fetch(`${host}/api/notes/fetchallnotes`, {
       method: "GET",
+      mode: "cors", // Explicitly enable CORS
       headers: {
         "Content-Type": "application/json",
         "auth-token": localStorage.getItem("token"),
@@ -26,6 +27,7 @@ const NoteState = (props) => {
     // API Call
     const response = await fetch(`${host}/api/notes/addnote`, {
       method: "POST",
+      mode: "cors", // Explicitly enable CORS
       headers: {
         "Content-Type": "application/json",
         "auth-token": localStorage.getItem("token"),
@@ -42,6 +44,7 @@ const NoteState = (props) => {
     // API Call
     const response = await fetch(`${host}/api/notes/deletenote/${id}`, {
       method: "DELETE",
+      mode: "cors", // Explicitly enable CORS
       headers: {
         "Content-Type": "application/json",
         "auth-token": localStorage.getItem("token"),
@@ -60,6 +63,7 @@ const NoteState = (props) => {
     // API Call
     const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
       method: "PUT",
+      mode: "cors", // Explicitly enable CORS
       headers: {
         "Content-Type": "application/json",
         "auth-token": localStorage.getItem("token"),

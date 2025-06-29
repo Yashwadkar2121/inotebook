@@ -16,6 +16,8 @@ const Signup = (props) => {
     const { name, email, password } = credentials;
     const response = await fetch(`${host}/api/auth/createuser`, {
       method: "POST",
+      mode: "cors", // Explicitly enable CORS
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },

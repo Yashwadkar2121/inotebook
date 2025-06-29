@@ -11,6 +11,8 @@ const Login = (props) => {
     e.preventDefault();
     const response = await fetch(`${host}/api/auth/login`, {
       method: "POST",
+      mode: "cors", // Explicitly enable CORS
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },

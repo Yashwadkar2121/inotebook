@@ -25,12 +25,32 @@ const corsOptions = {
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
+  optionsSuccessStatus: 200, // For legacy browser support
 };
 
+// Apply CORS middleware
 app.use(cors(corsOptions));
 
-// Handle preflight requests
+// Explicitly handle OPTIONS requests
 app.options("*", cors(corsOptions));
+
+// Add manual CORS headers as fallback
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+    res.setHeader(
+      "Access-Control-Allow-Methods",
+      "GET, POST, PUT, DELETE, OPTIONS"
+    );
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "Content-Type, Authorization"
+    );
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+  }
+  next();
+});
 
 // Middleware
 app.use(express.json());
@@ -50,5 +70,4 @@ if (process.env.NODE_ENV !== "production") {
   });
 }
 
-// Export for Vercel
 module.exports = app;
